@@ -5,13 +5,15 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: write      # FIXED
+  contents: write
   pages: write
   id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages  
 
     steps:
     - name: Checkout
@@ -35,7 +37,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './dist'  # Ensure this is the correct build output folder
+        path: './dist'
 
     - name: Deploy to GitHub Pages
       id: deployment
